@@ -16,16 +16,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 
-import urllib
+import FlibaLoader
+import os
 
-BASE_ADDRESS = 'http://www.flibusta.net/daily/'
-
-def _getX (address):
-	response = urllib.urlopen (address)
-	return response.read ()
-
-def getDailyPage ():
-	return _getX (BASE_ADDRESS)
-
-def getFileContent (FileName):
-	return _getX (BASE_ADDRESS + FileName)
+def downloadFiles (filelist, download_dir):
+	for fn in filelist:
+		remotename = os.path.join (FlibaLoader.BASE_ADDRESS, fn)
+		print "Download " + remotename + " ",
+		content = FlibaLoader.getFileContent (fn)
+		myfilename = os.path.join (download_dir, fn)
+		fh = open (myfilename, "w")
+		fh.write (content)
+		print "OK"
+		fh.close ()
+	return
