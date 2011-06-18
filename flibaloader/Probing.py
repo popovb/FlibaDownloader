@@ -16,21 +16,34 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 
-from flibaloader.FlibaLoader          import *
-from flibaloader.FlibaDailyPageParser import *
-from flibaloader.FlibaLocalDir        import *
+import re
 
-#TODO try to exception
+def _get (filename):
+	template = r"[0-9]+-[0-9]+\."
+	r = re.findall (template, filename)
+	if (len (r) == 0):
+		return [0, '0.']
+	return re.split (r"-", r[0])
 
-daily_page = getDailyPage ()
-parser = FlibaHTMLParser ()
-file_list_in_flibusta  = parser.parse (daily_page)
-print file_list_in_flibusta
+def getFirstNum (filename):
+	return _get (filename) [0]
 
-local_dir = FlibaLocalDir ();
-content = local_dir.getContentDir ('/media/toshiba2/boris/fb2.Flibusta.Net/')
-print content
-print len (content)
+def getLastNum (filename):
+	temp = _get (filename)
+	return temp[1] [0:len(temp[1]) - 1]
 
-	
-#TODO
+def _probe (filename, template):
+	return re.search (template, filename)
+
+def _probeNOFB2 (filename):
+	return _probe (filename, r".+\.n\..+")
+
+def _probeFB2 (filename):
+	return _probe (filename, r".+fb2.+")
+
+def getType (filename):
+	if _probeFB2 (filename):
+		return 'FB2'
+	if _probeNOFB2 (filename):
+		return 'NO_FB2'
+	return 'FB2'

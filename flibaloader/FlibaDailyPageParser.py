@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# Copyright (c) 2011, Boris Popov <popov.b@gmail.com>
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -14,36 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 
-import re
+import Probing
 from HTMLParser import *
-
-def _get (filename, template):
-	r = re.findall (template, filename)
-	if len (r) == 0:
-		return 0
-	return r[0][1:len(r[0])-1]
-
-def _getFirstNum (filename):
-	return _get (filename, r"\.[0-9]+-")
-
-def _getLastNum (filename):
-	return _get (filename, r"-[0-9]+\.")
-
-def _probe (filename, template):
-	return re.search (template, filename)
-
-def _probeNOFB2 (filename):
-	return _probe (filename, r".+\.n\..+")
-
-def _probeFB2 (filename):
-	return _probe (filename, r".+fb2.+")
-
-def _getType (filename):
-	if _probeFB2 (filename):
-		return 'FB2'
-	if _probeNOFB2 (filename):
-		return 'NO_FB2'
-	return 'FB2'
 
 class FlibaHTMLParser (HTMLParser):
 	def __init__ (self):
@@ -71,8 +45,8 @@ class FlibaHTMLParser (HTMLParser):
 		for filename in self._FileList:
 
 			temp = {'FileName' : filename};
-			temp.update ( {'FirstName' : _getFirstNum (filename)} )
-			temp.update ( {'LastName'  : _getLastNum  (filename)} )
-			temp.update ( {'Type'      : _getType     (filename)} )
+			temp.update ( {'FirstNum' : Probing.getFirstNum (filename)} )
+			temp.update ( {'LastNum'  : Probing.getLastNum  (filename)} )
+			temp.update ( {'Type'     : Probing.getType     (filename)} )
 			list_of_dict.append (temp)
 		return list_of_dict
