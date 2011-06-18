@@ -19,18 +19,21 @@
 from flibaloader.FlibaLoader          import *
 from flibaloader.FlibaDailyPageParser import *
 from flibaloader.FlibaLocalDir        import *
+from flibaloader.ListGenerator        import *
 
 #TODO try to exception
 
 daily_page = getDailyPage ()
 parser = FlibaHTMLParser ()
 file_list_in_flibusta  = parser.parse (daily_page)
-print file_list_in_flibusta
+#print file_list_in_flibusta
 
 local_dir = FlibaLocalDir ();
 content = local_dir.getContentDir ('/media/toshiba2/boris/fb2.Flibusta.Net/')
-print content
-print len (content)
+#print content
+#print len (content)
+list_for_download = getList_FB2 (content, file_list_in_flibusta)
+print list_for_download
 
 	
 #TODO
