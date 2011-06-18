@@ -16,9 +16,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 
-from FlibaLoader          import *
-from FlibaDailyPageParser import *
-from FlibaLocalDir        import *
+from flibaloader.FlibaLoader          import *
+from flibaloader.FlibaDailyPageParser import *
+from flibaloader.FlibaLocalDir        import *
 
 #FlibaLocalDir.py
 '''
