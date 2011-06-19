@@ -16,23 +16,60 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 
+import sys
+import getopt
 from flibaloader.FlibaLoader          import *
 from flibaloader.FlibaDailyPageParser import *
 from flibaloader.FlibaLocalDir        import *
 from flibaloader.ListGenerator        import *
 from flibaloader.Downloader           import *
 
-#TODO try to exception
+PROGRAMM = 'FlibustaDownloader.py'
+VERSION = '0.1.0'
+LOCAL_PATH = ''
 
+def info ():
+	print PROGRAMM + ", ver." + str (VERSION)
+	print """Copyright (c) 2011, Boris Popov <popov.b@gmail.com>
+This program comes with ABSOLUTELY NO WARRANTY.
+This is free software, and you are welcome to redistribute it
+under certain conditions.
+"""
+	return
+
+def help ():
+	info ()
+	print "Usage: " + PROGRAMM + """ [OPTIONS]
+       -h      display this usage message;
+       -d dir  local directory.
+"""
+	return
+
+try:
+	opts, args = getopt.getopt (sys.argv[1:], 'd:h')
+
+except getopt.GetoptError:
+	print >> sys.stderr, "Error of command line!"
+	sys.exit (1)
+
+for arg, val in opts:
+
+	if arg == '-h':
+		help ()
+		sys.exit (0)
+		
+	elif arg == '-d':
+		LOCAL_PATH = val
+		
+
+#TODO try to exception
 daily_page = getDailyPage ()
 parser = FlibaHTMLParser ()
 file_list_in_flibusta  = parser.parse (daily_page)
 
 local_dir = FlibaLocalDir ();
-local_path = '/media/toshiba2/boris/fb2.Flibusta.Net/'
-content = local_dir.getContentDir (local_path)
+content = local_dir.getContentDir (LOCAL_PATH)
 
 list_for_download = getList_FB2 (content, file_list_in_flibusta)
-downloadFiles (list_for_download, local_path)
-	
+downloadFiles (list_for_download, LOCAL_PATH)
 #TODO
