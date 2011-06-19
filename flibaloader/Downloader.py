@@ -39,7 +39,7 @@ def downloadFiles (filelist, download_dir):
 		
 		###
 		try:
-			fh = open (myfilename, "w")
+			fh = open (myfilename, "wb")
 
 		except:
 			print >> sys.stderr, "Error of opening file!"
