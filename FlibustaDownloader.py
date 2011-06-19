@@ -61,9 +61,15 @@ for arg, val in opts:
 	elif arg == '-d':
 		LOCAL_PATH = val
 		
+try:
+	daily_page = getDailyPage ()
 
-#TODO try to exception
-daily_page = getDailyPage ()
+except:
+	print >> sys.stderr, "Error of retrieving remote filelist!"
+	print >> sys.stderr, "Maybe flibusta is down..."
+	print >> sys.stderr, "Please, check your computer's network connection, firewall, proxy, etc..."
+	sys.exit (2)
+
 parser = FlibaHTMLParser ()
 file_list_in_flibusta  = parser.parse (daily_page)
 
@@ -71,7 +77,5 @@ local_dir = FlibaLocalDir ();
 content = local_dir.getContentDir (LOCAL_PATH)
 
 list_for_download = getList_FB2 (content, file_list_in_flibusta)
-downloadFiles (list_for_download, LOCAL_PATH)
-#TODO
 
-sys.exit (0)
+sys.exit ( downloadFiles (list_for_download, LOCAL_PATH) )

@@ -23,10 +23,37 @@ def downloadFiles (filelist, download_dir):
 	for fn in filelist:
 		remotename = os.path.join (FlibaLoader.BASE_ADDRESS, fn)
 		print "Download " + remotename + " ",
-		content = FlibaLoader.getFileContent (fn)
+	
+		###
+		try:
+			content = FlibaLoader.getFileContent (fn)
+
+		finally:
+			print >> sys.stderr, "Error of downloading file!"
+			return 3;
+		###
+
 		myfilename = os.path.join (download_dir, fn)
-		fh = open (myfilename, "w")
-		fh.write (content)
+		
+		###
+		try:
+			fh = open (myfilename, "w")
+
+		finally:
+			print >> sys.stderr, "Error of opening file!"
+			return 4;
+		###
+
+		###
+		try:
+			fh.write (content)
+
+		finally:
+			print >> sys.stderr, "Error of saving file!"
+			fh.close ()
+			return 5;
+		###
+		
 		print "OK"
 		fh.close ()
-	return
+	return 0
