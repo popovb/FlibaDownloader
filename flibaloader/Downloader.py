@@ -18,11 +18,13 @@
 
 import FlibaLoader
 import os
+import sys
 
 def downloadFiles (filelist, download_dir):
 	for fn in filelist:
 		remotename = os.path.join (FlibaLoader.BASE_ADDRESS, fn)
-		print "Download " + remotename + " ",
+		print "Download " + remotename + " ...",
+		sys.stdout.flush ()
 	
 		###
 		try:
@@ -55,5 +57,6 @@ def downloadFiles (filelist, download_dir):
 		###
 		
 		print "OK"
+		sys.stdout.flush ()
 		fh.close ()
 	return 0
