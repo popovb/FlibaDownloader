@@ -1,6 +1,6 @@
 from distutils.core import setup
 setup (name = 'flibustadownloader',
-		version      = '0.1.0',
+		version      = '0.1.1',
 		url          = 'https://github.com/popovb/FlibaDownloader',
 		author       = 'Boris Popov',
 		author_email = 'popov.b@gmail.com',
