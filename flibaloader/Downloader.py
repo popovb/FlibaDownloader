@@ -30,7 +30,7 @@ def downloadFiles (filelist, download_dir):
 		try:
 			content = FlibaLoader.getFileContent (fn)
 
-		finally:
+		except:
 			print >> sys.stderr, "Error of downloading file!"
 			return 3;
 		###
@@ -41,7 +41,7 @@ def downloadFiles (filelist, download_dir):
 		try:
 			fh = open (myfilename, "w")
 
-		finally:
+		except:
 			print >> sys.stderr, "Error of opening file!"
 			return 4;
 		###
@@ -50,7 +50,7 @@ def downloadFiles (filelist, download_dir):
 		try:
 			fh.write (content)
 
-		finally:
+		except:
 			print >> sys.stderr, "Error of saving file!"
 			fh.close ()
 			return 5;
