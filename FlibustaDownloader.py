@@ -73,3 +73,5 @@ content = local_dir.getContentDir (LOCAL_PATH)
 list_for_download = getList_FB2 (content, file_list_in_flibusta)
 downloadFiles (list_for_download, LOCAL_PATH)
 #TODO
+
+sys.exit (0)
