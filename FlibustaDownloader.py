@@ -74,8 +74,15 @@ parser = FlibaHTMLParser ()
 file_list_in_flibusta  = parser.parse (daily_page)
 
 local_dir = FlibaLocalDir ();
-content = local_dir.getContentDir (LOCAL_PATH)
 
+try:
+	content = local_dir.getContentDir (LOCAL_PATH)
+
+except:
+	print >> sys.stderr, "Error of retrieving local filelist!"
+	print >> sys.stderr, "Please, check option -d."
+	sys.exit (6)
+	
 list_for_download = getList_FB2 (content, file_list_in_flibusta)
 
 sys.exit ( downloadFiles (list_for_download, LOCAL_PATH) )
