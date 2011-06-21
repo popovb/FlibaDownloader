@@ -13,7 +13,7 @@
 
 ИСПОЛЬЗОВАНИЕ
 -------------
-`FlibustaDownloader.py -d path_to_dir`
+_FlibustaDownloader.py -d path_to_dir_
 
 path\_to\_dir - каталог где лежат архивы.
 
