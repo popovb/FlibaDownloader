@@ -1,13 +1,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru">
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
-ЭТО ТЕСТОВАЯ ХРЕНЬ
-==================
 
-ЭТО ЕЩЁ ОДНА ХРЕНЬ
-------------------
+КАЧАЛКА ЕЖЕДНЕВНЫХ ОБНОВЛЕНИЙ С FLIBUSTA NET
+============================================
 
-* one
-* two
+ТРЕБОВАНИЯ
+----------
+* Linux или Windows
+* Python 2.x
 
+УСТАНОВКА
+---------
+1. python setup.py build
+2. python setup.py install
 
-бред сивой кобыды
+ИСПОЛЬЗОВАНИЕ
+-------------
+`FlibustaDownloader.py -d path_to_dir`
+
+path\_to\_dir - каталог где лежат архивы.
+
+БАГИ
+----
+Я забыл вывести в интерфейс выбор типа файлов.
+Поэтому, сейчас выкачиваются только архивы с fb2 файлами.
+
+ЛИЦЕНЗИЯ
+--------
+GPL 3
