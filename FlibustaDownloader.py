@@ -18,14 +18,13 @@
 
 import sys
 import getopt
-from flibaloader.FlibaLoader          import *
 from flibaloader.FlibaDailyPageParser import *
 from flibaloader.FlibaLocalDir        import *
 from flibaloader.ListGenerator        import *
 from flibaloader.Downloader           import *
 
 PROGRAMM = 'FlibustaDownloader.py'
-VERSION = '0.1.1'
+VERSION = '0.2.0'
 LOCAL_PATH = ''
 
 def info ():

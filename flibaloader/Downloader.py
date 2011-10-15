@@ -16,19 +16,41 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 
-import FlibaLoader
 import os
 import sys
+import urllib2
+
+BASE_ADDRESS1 = 'http://www.flibusta.net/daily/'
+BASE_ADDRESS2 = 'http://proxy.flibusta.net/daily/'
+TIMEOUT = 10
+
+def _getX (address):
+	response = urllib2.urlopen (address, None, TIMEOUT)
+	return response.read ()
+
+def getDailyPage ():
+	try:
+		rp = _getX (BASE_ADDRESS1)
+	except:
+		rp = _getX (BASE_ADDRESS2)
+	return rp
+
+def getFileContent (FileName):
+	try:
+		rp =  _getX (BASE_ADDRESS1 + FileName)
+	except:
+		rp =  _getX (BASE_ADDRESS2 + FileName)
+	return rp
 
 def downloadFiles (filelist, download_dir):
 	for fn in filelist:
-		remotename = os.path.join (FlibaLoader.BASE_ADDRESS, fn)
+		remotename = os.path.join (BASE_ADDRESS1, fn)
 		print "Download " + remotename + " ...",
 		sys.stdout.flush ()
 	
 		###
 		try:
-			content = FlibaLoader.getFileContent (fn)
+			content = getFileContent (fn)
 
 		except:
 			print >> sys.stderr, "Error of downloading file!"
