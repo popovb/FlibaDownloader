@@ -24,7 +24,7 @@ from flibaloader.ListGenerator        import *
 from flibaloader.Downloader           import *
 
 PROGRAMM = 'FlibustaDownloader.py'
-VERSION = '0.2.0'
+VERSION = '0.2.1'
 LOCAL_PATH = ''
 
 def info ():
