@@ -65,7 +65,7 @@ def downloadFiles (filelist, download_dir):
 
 		except:
 			print >> sys.stderr, "Error of downloading file!"
-			return 3;
+			continue
 		###
 
 		myfilename = os.path.join (download_dir, fn)
@@ -76,7 +76,7 @@ def downloadFiles (filelist, download_dir):
 
 		except:
 			print >> sys.stderr, "Error of opening file!"
-			return 4;
+			return 4
 		###
 
 		###
@@ -86,7 +86,7 @@ def downloadFiles (filelist, download_dir):
 		except:
 			print >> sys.stderr, "Error of saving file!"
 			fh.close ()
-			return 5;
+			return 5
 		###
 
 		sys.stdout.flush ()
