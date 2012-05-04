@@ -19,6 +19,7 @@
 import os
 import sys
 import urllib2
+import zipfile
 
 BASE_ADDRESS1 = 'http://www.flibusta.net/daily/'
 BASE_ADDRESS2 = 'http://proxy.flibusta.net/daily/'
@@ -41,6 +42,16 @@ def getFileContent (FileName):
 	except:
 		rp =  _getX (BASE_ADDRESS2 + FileName)
 	return rp
+
+
+def testZipFile (filename):
+	try:
+		file = zipfile.ZipFile (filename, 'r');
+		
+	except:
+		return False
+	return True
+
 
 def downloadFiles (filelist, download_dir):
 	for fn in filelist:
@@ -77,8 +88,24 @@ def downloadFiles (filelist, download_dir):
 			fh.close ()
 			return 5;
 		###
-		
-		print "OK"
+
 		sys.stdout.flush ()
 		fh.close ()
+
+		if testZipFile (myfilename):
+			print "OK"
+
+		else:
+			print "CORRUPT"
+			os.remove (myfilename)
 	return 0
+
+
+if __name__ == '__main__':
+
+	if testZipFile (sys.argv[1]):
+		print "OK"
+			
+	else:
+		print "ERROR"
+		os.remove (sys.argv[1])
